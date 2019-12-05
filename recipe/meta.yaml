@@ -1,6 +1,6 @@
 {% set name = "gooseslurm" %}
-{% set version = "0.1.1" %}
-{% set sha256 = "10a4a6ad426399fc0601ac9b90af344615ca5d57278e912e0b021281883e52f5" %}
+{% set version = "0.1.2" %}
+{% set sha256 = "0d9e56ee36976d975d3e8dc4d15de4f444f578e1399b276669df5f03f1cb6180" %}
 
 package:
   name: {{ name|lower }}
