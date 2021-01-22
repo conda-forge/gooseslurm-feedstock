@@ -25,11 +25,12 @@ requirements:
   host:
     - python
     - pip
-    - setuptools
   run:
     - python
     - docopt
     - click
+    - tqdm
+    - pyyaml
 
 test:
   imports:
