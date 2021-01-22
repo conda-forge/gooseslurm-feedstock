@@ -1,6 +1,6 @@
 {% set name = "gooseslurm" %}
-{% set version = "0.1.2" %}
-{% set sha256 = "0d9e56ee36976d975d3e8dc4d15de4f444f578e1399b276669df5f03f1cb6180" %}
+{% set version = "0.2.0" %}
+{% set sha256 = "f3170e04dd49e61ef5758bb7aab2f4efb42beb6721c43df41573190ce93fcd54" %}
 
 package:
   name: {{ name|lower }}
@@ -11,9 +11,9 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 2
-  skip: True  # [win or py<35]
-  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
+  number: 0
+  skip: true  # [win or py<35]
+  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv
   entry_points:
     - Gdel = GooseSLURM.cli.Gdel:main
     - Ginfo = GooseSLURM.cli.Ginfo:main
@@ -46,8 +46,8 @@ about:
   license: MIT
   license_family: MIT
   license_file: LICENSE
-  summary: 'SLURM command line tools and scripts.'
-  description: 'SLURM command line tools and scripts.'
+  summary: SLURM command line tools and scripts.
+  description: SLURM command line tools and scripts.
   doc_url: https://github.com/tdegeus/GooseSLURM
   dev_url: https://github.com/tdegeus/GooseSLURM
 
