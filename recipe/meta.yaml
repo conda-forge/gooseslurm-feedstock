@@ -1,25 +1,25 @@
-{% set name = "gooseslurm" %}
-{% set version = "0.4.1" %}
-{% set sha256 = "3e169f5fdc0b485b633bc4fdd023afa4d91061595d9915e24faf208865fbc0dc" %}
+{% set name = "GooseSLURM" %}
+{% set org = "tdegeus" %}
+{% set version = "0.5.1" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/tdegeus/GooseSLURM/archive/v{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  url: https://github.com/{{ org }}/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 1f52cfba3ff1f3122243c0fc0cfe1b5dfa049f35865da95e0a0385d926a4b8d1
 
 build:
   number: 0
   skip: true  # [win or py<35]
-  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv
+  script: {{ PYTHON }} -m pip install . -vv
   entry_points:
-    - Gdel = GooseSLURM.cli.Gdel:main
-    - Ginfo = GooseSLURM.cli.Ginfo:main
-    - Gps = GooseSLURM.cli.Gps:main
-    - Gstat = GooseSLURM.cli.Gstat:main
-    - Gsub = GooseSLURM.cli.Gsub:main
+    - Gdel = {{ name }}.cli.Gdel:main
+    - Ginfo = {{ name }}.cli.Ginfo:main
+    - Gps = {{ name }}.cli.Gps:main
+    - Gstat = {{ name }}.cli.Gstat:main
+    - Gsub = {{ name }}.cli.Gsub:main
 
 requirements:
   build:
@@ -37,7 +37,7 @@ requirements:
 
 test:
   imports:
-    - GooseSLURM
+    - {{ name }}
   commands:
     - Gdel --help
     - Ginfo --help
@@ -46,14 +46,14 @@ test:
     - Gsub --help
 
 about:
-  home: https://github.com/tdegeus/GooseSLURM
+  home: https://github.com/{{ org }}/{{ name }}
   license: MIT
   license_family: MIT
   license_file: LICENSE
   summary: SLURM command line tools and scripts.
   description: SLURM command line tools and scripts.
-  doc_url: https://github.com/tdegeus/GooseSLURM
-  dev_url: https://github.com/tdegeus/GooseSLURM
+  doc_url: https://github.com/{{ org }}/{{ name }}
+  dev_url: https://github.com/{{ org }}/{{ name }}
 
 extra:
   recipe-maintainers:
