@@ -12,7 +12,7 @@ source:
 
 build:
   number: 0
-  skip: true  # [win or py<35]
+  script_env: SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - Gdel = {{ name }}.cli.Gdel:main
@@ -23,27 +23,32 @@ build:
 
 requirements:
   build:
-    - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - python                                 # [build_platform != target_platform]
   host:
-    - python
     - pip
-  run:
     - python
-    - docopt
+    - setuptools_scm
+  run:
     - click
-    - tqdm
+    - docopt
+    - python
     - pyyaml
+    - tqdm
 
 test:
   imports:
     - {{ name }}
   commands:
-    - Gdel --help
-    - Ginfo --help
-    - Gps --help
-    - Gstat --help
-    - Gsub --help
+    - pip check
+    - python -c "import {{ name }}; print({{ name }}.version)"
+    - Gdel --version
+    - Ginfo --version
+    - Gps --version
+    - Gstat --version
+    - Gsub --version
+  requires:
+    - pip
 
 about:
   home: https://github.com/{{ org }}/{{ name }}
