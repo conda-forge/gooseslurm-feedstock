@@ -23,9 +23,6 @@ build:
     - Gsub = {{ name }}.cli.Gsub:main
 
 requirements:
-  build:
-    - cross-python_{{ target_platform }}  # [build_platform != target_platform]
-    - python >=3.6                        # [build_platform != target_platform]
   host:
     - pip
     - python >=3.6
