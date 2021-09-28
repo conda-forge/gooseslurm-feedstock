@@ -1,6 +1,6 @@
 {% set name = "GooseSLURM" %}
 {% set org = "tdegeus" %}
-{% set version = "0.5.1" %}
+{% set version = "0.6.0" %}
 
 package:
   name: {{ name|lower }}
@@ -8,11 +8,12 @@ package:
 
 source:
   url: https://github.com/{{ org }}/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 1f52cfba3ff1f3122243c0fc0cfe1b5dfa049f35865da95e0a0385d926a4b8d1
+  sha256: b1cab65ad4f0b5d7ad6838d89491acf01ef76a0cf82a386518e5fa7d176aeefa
 
 build:
   number: 0
-  skip: true  # [win or py<35]
+  noarch: python
+  script_env: SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - Gdel = {{ name }}.cli.Gdel:main
@@ -22,28 +23,30 @@ build:
     - Gsub = {{ name }}.cli.Gsub:main
 
 requirements:
-  build:
-    - python                                 # [build_platform != target_platform]
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
   host:
-    - python
     - pip
+    - python >=3.6
+    - setuptools_scm
   run:
-    - python
-    - docopt
     - click
-    - tqdm
+    - docopt
+    - python >=3.6
     - pyyaml
+    - tqdm
 
 test:
   imports:
     - {{ name }}
   commands:
-    - Gdel --help
-    - Ginfo --help
-    - Gps --help
-    - Gstat --help
-    - Gsub --help
+    - pip check
+    - python -c "import {{ name }}; print({{ name }}.version)"
+    - Gdel --version
+    - Ginfo --version
+    - Gps --version
+    - Gstat --version
+    - Gsub --version
+  requires:
+    - pip
 
 about:
   home: https://github.com/{{ org }}/{{ name }}
