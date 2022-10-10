@@ -1,6 +1,6 @@
 {% set name = "GooseSLURM" %}
 {% set org = "tdegeus" %}
-{% set version = "0.10.0" %}
+{% set version = "0.10.1" %}
 
 package:
   name: {{ name|lower }}
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://github.com/{{ org }}/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 0b432b00c09e890162b8d804eee8143c1eca5087db98f9428006085462b57cc3
+  sha256: 447703489be5cb95323304c7a905fcf4034d289fd7e71a3fecf387348754c130
 
 build:
   number: 0
