@@ -1,13 +1,11 @@
-{% set name = "GooseSLURM" %}
-{% set org = "tdegeus" %}
 {% set version = "0.13.2" %}
 
 package:
-  name: {{ name|lower }}
+  name: gooseslurm
   version: {{ version }}
 
 source:
-  url: https://github.com/{{ org }}/{{ name }}/archive/v{{ version }}.tar.gz
+  url: https://github.com/tdegeus/GooseSLURM/archive/v{{ version }}.tar.gz
   sha256: 7fd4abc01b1ca5701563cb071aad393c7e86098d402c5e273071f02e0f70e9cb
 
 build:
@@ -16,31 +14,32 @@ build:
   script_env: SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
-    - Gdel = {{ name }}.cli.Gdel:main
-    - Ginfo = {{ name }}.cli.Ginfo:main
-    - Gps = {{ name }}.cli.Gps:main
-    - Gstat = {{ name }}.cli.Gstat:main
-    - Gsub = {{ name }}.cli.Gsub:main
+    - Gdel = GooseSLURM.cli.Gdel:main
+    - Ginfo = GooseSLURM.cli.Ginfo:main
+    - Gps = GooseSLURM.cli.Gps:main
+    - Gstat = GooseSLURM.cli.Gstat:main
+    - Gsub = GooseSLURM.cli.Gsub:main
 
 requirements:
   host:
     - pip
     - python >=3.6
-    - setuptools_scm
+    - setuptools >=45
+    - setuptools_scm >=6.2
   run:
     - click
-    - docopt
     - numpy
     - python >=3.6
     - pyyaml
     - tqdm
+    - typing_extensions
 
 test:
   imports:
-    - {{ name }}
+    - GooseSLURM
   commands:
     - pip check
-    - python -c "import {{ name }}; assert {{ name }}.version == '{{ version }}'"
+    - python -c "import GooseSLURM; assert GooseSLURM.version == '{{ version }}'"
     - Gdel --version | grep {{ version }}
     - Ginfo --version | grep {{ version }}
     - Gps --version | grep {{ version }}
@@ -50,14 +49,14 @@ test:
     - pip
 
 about:
-  home: https://github.com/{{ org }}/{{ name }}
+  home: https://github.com/tdegeus/GooseSLURM
   license: MIT
   license_family: MIT
   license_file: LICENSE
   summary: SLURM command line tools and scripts.
   description: SLURM command line tools and scripts.
-  doc_url: https://github.com/{{ org }}/{{ name }}
-  dev_url: https://github.com/{{ org }}/{{ name }}
+  doc_url: https://github.com/tdegeus/GooseSLURM
+  dev_url: https://github.com/tdegeus/GooseSLURM
 
 extra:
   recipe-maintainers:
