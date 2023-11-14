@@ -14,11 +14,11 @@ build:
   script_env: SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
-    - Gdel = GooseSLURM.cli.Gdel:main
-    - Ginfo = GooseSLURM.cli.Ginfo:main
-    - Gps = GooseSLURM.cli.Gps:main
-    - Gstat = GooseSLURM.cli.Gstat:main
-    - Gsub = GooseSLURM.cli.Gsub:main
+    - Gdel = GooseSLURM.cli_Gdel:main
+    - Ginfo = GooseSLURM.cli_Ginfo:main
+    - Gps = GooseSLURM.cli_Gps:main
+    - Gstat = GooseSLURM.cli_Gstat:main
+    - Gsub = GooseSLURM.cli_Gsub:main
 
 requirements:
   host:
