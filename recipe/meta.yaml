@@ -1,4 +1,4 @@
-{% set version = "0.13.3" %}
+{% set version = "0.13.4" %}
 
 package:
   name: gooseslurm
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/tdegeus/GooseSLURM/archive/v{{ version }}.tar.gz
-  sha256: f31ee361c6bd9f70b179bcc9d2f9f1da109d8b79a966cf904cd10b65b37dbaeb
+  sha256: cf33854158f74da3b5496763c538714445805ae545ccf80fd5970db0f9438f4d
 
 build:
   number: 0
