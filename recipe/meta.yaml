@@ -1,14 +1,12 @@
-{% set name = "GooseSLURM" %}
-{% set org = "tdegeus" %}
-{% set version = "0.12.4" %}
+{% set version = "0.13.4" %}
 
 package:
-  name: {{ name|lower }}
+  name: gooseslurm
   version: {{ version }}
 
 source:
-  url: https://github.com/{{ org }}/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 0fb77acee8610b9d09afef0e76598025ea17ff81c5acfba50197051ec9fd7043
+  url: https://github.com/tdegeus/GooseSLURM/archive/v{{ version }}.tar.gz
+  sha256: cf33854158f74da3b5496763c538714445805ae545ccf80fd5970db0f9438f4d
 
 build:
   number: 0
@@ -16,31 +14,32 @@ build:
   script_env: SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
-    - Gdel = {{ name }}.cli.Gdel:main
-    - Ginfo = {{ name }}.cli.Ginfo:main
-    - Gps = {{ name }}.cli.Gps:main
-    - Gstat = {{ name }}.cli.Gstat:main
-    - Gsub = {{ name }}.cli.Gsub:main
+    - Gdel = GooseSLURM.cli_Gdel:main
+    - Ginfo = GooseSLURM.cli_Ginfo:main
+    - Gps = GooseSLURM.cli_Gps:main
+    - Gstat = GooseSLURM.cli_Gstat:main
+    - Gsub = GooseSLURM.cli_Gsub:main
 
 requirements:
   host:
     - pip
     - python >=3.6
-    - setuptools_scm
+    - setuptools >=45
+    - setuptools_scm >=6.2
   run:
     - click
-    - docopt
     - numpy
     - python >=3.6
     - pyyaml
     - tqdm
+    - typing_extensions
 
 test:
   imports:
-    - {{ name }}
+    - GooseSLURM
   commands:
     - pip check
-    - python -c "import {{ name }}; assert {{ name }}.version == '{{ version }}'"
+    - python -c "import GooseSLURM; assert GooseSLURM.version == '{{ version }}'"
     - Gdel --version | grep {{ version }}
     - Ginfo --version | grep {{ version }}
     - Gps --version | grep {{ version }}
@@ -50,14 +49,14 @@ test:
     - pip
 
 about:
-  home: https://github.com/{{ org }}/{{ name }}
+  home: https://github.com/tdegeus/GooseSLURM
   license: MIT
   license_family: MIT
   license_file: LICENSE
   summary: SLURM command line tools and scripts.
   description: SLURM command line tools and scripts.
-  doc_url: https://github.com/{{ org }}/{{ name }}
-  dev_url: https://github.com/{{ org }}/{{ name }}
+  doc_url: https://github.com/tdegeus/GooseSLURM
+  dev_url: https://github.com/tdegeus/GooseSLURM
 
 extra:
   recipe-maintainers:
