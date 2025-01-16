@@ -9,7 +9,7 @@ source:
   sha256: cf33854158f74da3b5496763c538714445805ae545ccf80fd5970db0f9438f4d
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script_env: SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
   script: {{ PYTHON }} -m pip install . -vv
@@ -23,13 +23,13 @@ build:
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
     - setuptools >=45
     - setuptools_scm >=6.2
   run:
     - click
     - numpy
-    - python >=3.6
+    - python >={{ python_min }}
     - pyyaml
     - tqdm
     - typing_extensions
@@ -47,6 +47,7 @@ test:
     - Gsub --version | grep {{ version }}
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/tdegeus/GooseSLURM
